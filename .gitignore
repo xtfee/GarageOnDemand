@@ -1,0 +1,46 @@
+# --- Secrets ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv/
+*.egg-info/
+.pytest_cache/
+
+# --- Django ---
+db.sqlite3
+db.sqlite3-journal
+local_settings.py
+*.log
+
+# --- Node / Vite ---
+node_modules/
+frontend/node_modules/
+frontend/dist/
+.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+.claude/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# --- Project artefacts ---
+caly_projekt.txt

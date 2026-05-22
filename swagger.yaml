@@ -1,0 +1,1686 @@
+openapi: 3.0.3
+info:
+  title: Garaż na Żądanie API
+  version: 1.0.0
+  description: Dokumentacja API systemu rezerwacji garaży warsztatowych.
+paths:
+  /api/accounts/change-password/:
+    put:
+      operationId: api_accounts_change_password_update
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangePassword'
+          description: ''
+    patch:
+      operationId: api_accounts_change_password_partial_update
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedChangePasswordRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedChangePasswordRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedChangePasswordRequest'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangePassword'
+          description: ''
+  /api/accounts/confirm-email-change/:
+    post:
+      operationId: api_accounts_confirm_email_change_create
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/accounts/delete/:
+    delete:
+      operationId: api_accounts_delete_destroy
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/accounts/login/:
+    post:
+      operationId: api_accounts_login_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthTokenRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AuthTokenRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthTokenRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+          description: ''
+  /api/accounts/logout/:
+    post:
+      operationId: api_accounts_logout_create
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/accounts/profile/:
+    get:
+      operationId: api_accounts_profile_retrieve
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: api_accounts_profile_update
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    patch:
+      operationId: api_accounts_profile_partial_update
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUserRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserRequest'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+  /api/accounts/register/:
+    post:
+      operationId: api_accounts_register_create
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/accounts/users/:
+    get:
+      operationId: api_accounts_users_list
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+          description: ''
+    post:
+      operationId: api_accounts_users_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+  /api/accounts/users/{id}/:
+    get:
+      operationId: api_accounts_users_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this użytkownik.
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: api_accounts_users_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this użytkownik.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    patch:
+      operationId: api_accounts_users_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this użytkownik.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUserRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserRequest'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    delete:
+      operationId: api_accounts_users_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this użytkownik.
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/accounts/verify/{uidb64}/{token}/:
+    get:
+      operationId: api_accounts_verify_retrieve
+      parameters:
+      - in: path
+        name: token
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: uidb64
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/analytics/equipment-stats/:
+    get:
+      operationId: api_analytics_equipment_stats_retrieve
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/create-payment-intent/{reservation_id}/:
+    post:
+      operationId: api_create_payment_intent_create
+      parameters:
+      - in: path
+        name: reservation_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/garages/analytics-data/:
+    get:
+      operationId: api_garages_analytics_data_retrieve
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/garages/analyze-csv/:
+    post:
+      operationId: api_garages_analyze_csv_create
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/garages/equipment/:
+    get:
+      operationId: api_garages_equipment_list
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Equipment'
+          description: ''
+    post:
+      operationId: api_garages_equipment_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EquipmentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EquipmentRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EquipmentRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+          description: ''
+  /api/garages/equipment/{id}/:
+    get:
+      operationId: api_garages_equipment_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this equipment.
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+          description: ''
+    put:
+      operationId: api_garages_equipment_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this equipment.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EquipmentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EquipmentRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EquipmentRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+          description: ''
+    patch:
+      operationId: api_garages_equipment_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this equipment.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEquipmentRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEquipmentRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEquipmentRequest'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+          description: ''
+    delete:
+      operationId: api_garages_equipment_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this equipment.
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/garages/export/:
+    get:
+      operationId: api_garages_export_retrieve
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/garages/export-decision-tree/:
+    get:
+      operationId: api_garages_export_decision_tree_retrieve
+      description: |-
+        Eksportuje dane pod drzewo decyzyjne: Status Rezerwacji.
+        Target: is_success (1=Completed/Confirmed, 0=Cancelled)
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/garages/export-history/:
+    get:
+      operationId: api_garages_export_history_retrieve
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/garages/import-history/:
+    post:
+      operationId: api_garages_import_history_create
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/garages/list/:
+    get:
+      operationId: api_garages_list_list
+      parameters:
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Garage'
+          description: ''
+    post:
+      operationId: api_garages_list_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GarageRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GarageRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GarageRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Garage'
+          description: ''
+  /api/garages/list/{id}/:
+    get:
+      operationId: api_garages_list_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this garage.
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Garage'
+          description: ''
+    put:
+      operationId: api_garages_list_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this garage.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GarageRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GarageRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GarageRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Garage'
+          description: ''
+    patch:
+      operationId: api_garages_list_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this garage.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedGarageRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedGarageRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedGarageRequest'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Garage'
+          description: ''
+    delete:
+      operationId: api_garages_list_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this garage.
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/garages/list/{id}/check_availability/:
+    get:
+      operationId: api_garages_list_check_availability_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this garage.
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Garage'
+          description: ''
+  /api/garages/list/{id}/check_month_availability/:
+    get:
+      operationId: api_garages_list_check_month_availability_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this garage.
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Garage'
+          description: ''
+  /api/garages/ml-results/:
+    get:
+      operationId: api_garages_ml_results_retrieve
+      description: |-
+        GET: Analizuje reguły ML z bazy danych
+        POST: Analizuje reguły ML z przesłanego pliku CSV (symulacja)
+
+        UWAGA: Ujednolicona logika przetwarzania (Wirtualny CSV) zapewnia spójność wyników.
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: api_garages_ml_results_create
+      description: |-
+        GET: Analizuje reguły ML z bazy danych
+        POST: Analizuje reguły ML z przesłanego pliku CSV (symulacja)
+
+        UWAGA: Ujednolicona logika przetwarzania (Wirtualny CSV) zapewnia spójność wyników.
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/garages/reservations/:
+    get:
+      operationId: api_garages_reservations_list
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reservation'
+          description: ''
+    post:
+      operationId: api_garages_reservations_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+          description: ''
+  /api/garages/reservations/{id}/:
+    get:
+      operationId: api_garages_reservations_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this reservation.
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+          description: ''
+    put:
+      operationId: api_garages_reservations_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this reservation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+          description: ''
+    patch:
+      operationId: api_garages_reservations_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this reservation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedReservationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedReservationRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedReservationRequest'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+          description: ''
+    delete:
+      operationId: api_garages_reservations_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this reservation.
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/garages/reservations/{id}/confirm_extension/:
+    post:
+      operationId: api_garages_reservations_confirm_extension_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this reservation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+          description: ''
+  /api/garages/reservations/{id}/emergency_cancel/:
+    post:
+      operationId: api_garages_reservations_emergency_cancel_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this reservation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+          description: ''
+  /api/garages/reservations/{id}/initiate_extension/:
+    post:
+      operationId: api_garages_reservations_initiate_extension_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this reservation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+          description: ''
+  /api/garages/reservations/{id}/mark_overstay/:
+    post:
+      operationId: api_garages_reservations_mark_overstay_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this reservation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+          description: ''
+  /api/garages/reservations/{id}/mark_seen/:
+    post:
+      operationId: api_garages_reservations_mark_seen_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this reservation.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+          description: ''
+  /api/garages/reservations/active_notifications/:
+    get:
+      operationId: api_garages_reservations_active_notifications_retrieve
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+          description: ''
+  /api/garages/save-payment/:
+    post:
+      operationId: api_garages_save_payment_create
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/garages/system-config/:
+    get:
+      operationId: api_garages_system_config_retrieve
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: api_garages_system_config_create
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/garages/visualize-decision-tree/:
+    get:
+      operationId: api_garages_visualize_decision_tree_retrieve
+      description: |-
+        GET: Drzewo decyzyjne z bazy danych
+        POST: Drzewo decyzyjne z pliku CSV (format z export_decision_tree_csv)
+        Target: ZREALIZOWANA vs ANULOWANA
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: api_garages_visualize_decision_tree_create
+      description: |-
+        GET: Drzewo decyzyjne z bazy danych
+        POST: Drzewo decyzyjne z pliku CSV (format z export_decision_tree_csv)
+        Target: ZREALIZOWANA vs ANULOWANA
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+components:
+  schemas:
+    AuthToken:
+      type: object
+      properties:
+        token:
+          type: string
+          readOnly: true
+      required:
+      - token
+    AuthTokenRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+          minLength: 1
+          title: Nazwa użytkownika
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+          title: Hasło
+      required:
+      - password
+      - username
+    ChangePassword:
+      type: object
+      properties:
+        old_password:
+          type: string
+        new_password:
+          type: string
+      required:
+      - new_password
+      - old_password
+    ChangePasswordRequest:
+      type: object
+      properties:
+        old_password:
+          type: string
+          minLength: 1
+        new_password:
+          type: string
+          minLength: 1
+      required:
+      - new_password
+      - old_password
+    Equipment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        icon:
+          type: string
+          nullable: true
+          description: Nazwa ikony lub emoji
+          maxLength: 50
+      required:
+      - id
+      - name
+    EquipmentRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        icon:
+          type: string
+          nullable: true
+          description: Nazwa ikony lub emoji
+          maxLength: 50
+      required:
+      - name
+    Garage:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        address:
+          type: string
+          maxLength: 255
+        price_per_hour:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,4}(?:\.\d{0,2})?$
+        price_per_day:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,4}(?:\.\d{0,2})?$
+          nullable: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        width:
+          type: number
+          format: double
+          nullable: true
+          description: Szerokość w metrach
+        length:
+          type: number
+          format: double
+          nullable: true
+          description: Długość w metrach
+        height:
+          type: number
+          format: double
+          nullable: true
+          description: Wysokość w metrach
+        is_active:
+          type: boolean
+        equipment:
+          type: array
+          items:
+            type: integer
+      required:
+      - address
+      - id
+      - name
+      - price_per_hour
+    GarageRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        address:
+          type: string
+          minLength: 1
+          maxLength: 255
+        price_per_hour:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,4}(?:\.\d{0,2})?$
+        price_per_day:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,4}(?:\.\d{0,2})?$
+          nullable: true
+        image:
+          type: string
+          format: binary
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        width:
+          type: number
+          format: double
+          nullable: true
+          description: Szerokość w metrach
+        length:
+          type: number
+          format: double
+          nullable: true
+          description: Długość w metrach
+        height:
+          type: number
+          format: double
+          nullable: true
+          description: Wysokość w metrach
+        is_active:
+          type: boolean
+        equipment:
+          type: array
+          items:
+            type: integer
+      required:
+      - address
+      - name
+      - price_per_hour
+    PatchedChangePasswordRequest:
+      type: object
+      properties:
+        old_password:
+          type: string
+          minLength: 1
+        new_password:
+          type: string
+          minLength: 1
+    PatchedEquipmentRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+        icon:
+          type: string
+          nullable: true
+          description: Nazwa ikony lub emoji
+          maxLength: 50
+    PatchedGarageRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        address:
+          type: string
+          minLength: 1
+          maxLength: 255
+        price_per_hour:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,4}(?:\.\d{0,2})?$
+        price_per_day:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,4}(?:\.\d{0,2})?$
+          nullable: true
+        image:
+          type: string
+          format: binary
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        width:
+          type: number
+          format: double
+          nullable: true
+          description: Szerokość w metrach
+        length:
+          type: number
+          format: double
+          nullable: true
+          description: Długość w metrach
+        height:
+          type: number
+          format: double
+          nullable: true
+          description: Wysokość w metrach
+        is_active:
+          type: boolean
+        equipment:
+          type: array
+          items:
+            type: integer
+    PatchedReservationRequest:
+      type: object
+      properties:
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        is_historical:
+          type: boolean
+        garage:
+          type: integer
+    PatchedUserRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          minLength: 1
+          title: Nazwa użytkownika
+          description: Wymagana. 150 lub mniej znaków. Jedynie litery, cyfry i @/./+/-/_.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Adres e-mail
+          maxLength: 254
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+        first_name:
+          type: string
+          title: Imię
+          maxLength: 150
+        last_name:
+          type: string
+          title: Nazwisko
+          maxLength: 150
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        is_active:
+          type: boolean
+          title: Aktywny
+          description: Określa czy użytkownika należy uważać za aktywnego. Odznacz
+            zamiast usuwać konto.
+        phone_number:
+          type: string
+          minLength: 1
+    Reservation:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        garage_details:
+          allOf:
+          - $ref: '#/components/schemas/Garage'
+          readOnly: true
+        user_name:
+          type: string
+          readOnly: true
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        total_price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          readOnly: true
+        access_code:
+          type: string
+          readOnly: true
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        is_historical:
+          type: boolean
+        overstayed:
+          type: boolean
+          readOnly: true
+          description: Czy klient został w garażu po czasie?
+        cancellation_reason:
+          type: string
+          readOnly: true
+          nullable: true
+          description: Powód anulowania przez admina
+        cancellation_seen:
+          type: boolean
+          readOnly: true
+          description: Czy użytkownik odczytał powiadomienie o anulowaniu?
+        user:
+          type: integer
+          readOnly: true
+        garage:
+          type: integer
+      required:
+      - access_code
+      - cancellation_reason
+      - cancellation_seen
+      - created_at
+      - end_time
+      - garage
+      - garage_details
+      - id
+      - overstayed
+      - start_time
+      - status
+      - total_price
+      - user
+      - user_name
+    ReservationRequest:
+      type: object
+      properties:
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        is_historical:
+          type: boolean
+        garage:
+          type: integer
+      required:
+      - end_time
+      - garage
+      - start_time
+    RoleEnum:
+      enum:
+      - client
+      - admin
+      type: string
+      description: |-
+        * `client` - Klient
+        * `admin` - Administrator
+    StatusEnum:
+      enum:
+      - pending
+      - confirmed
+      - cancelled
+      - completed
+      - expired
+      type: string
+      description: |-
+        * `pending` - Oczekuje na płatność
+        * `confirmed` - Potwierdzona
+        * `cancelled` - Anulowana
+        * `completed` - Zakończona
+        * `expired` - Wygasła (Brak płatności)
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          title: Nazwa użytkownika
+          description: Wymagana. 150 lub mniej znaków. Jedynie litery, cyfry i @/./+/-/_.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Adres e-mail
+          maxLength: 254
+        first_name:
+          type: string
+          title: Imię
+          maxLength: 150
+        last_name:
+          type: string
+          title: Nazwisko
+          maxLength: 150
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        is_active:
+          type: boolean
+          title: Aktywny
+          description: Określa czy użytkownika należy uważać za aktywnego. Odznacz
+            zamiast usuwać konto.
+        phone_number:
+          type: string
+      required:
+      - id
+      - phone_number
+      - username
+    UserRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          minLength: 1
+          title: Nazwa użytkownika
+          description: Wymagana. 150 lub mniej znaków. Jedynie litery, cyfry i @/./+/-/_.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Adres e-mail
+          maxLength: 254
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+        first_name:
+          type: string
+          title: Imię
+          maxLength: 150
+        last_name:
+          type: string
+          title: Nazwisko
+          maxLength: 150
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        is_active:
+          type: boolean
+          title: Aktywny
+          description: Określa czy użytkownika należy uważać za aktywnego. Odznacz
+            zamiast usuwać konto.
+        phone_number:
+          type: string
+          minLength: 1
+      required:
+      - phone_number
+      - username
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"

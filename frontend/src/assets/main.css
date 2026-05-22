@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------
+   Button sizing — daisyUI 5 with Tailwind 3 ships inconsistent button
+   sizing. These rules guarantee comfortable padding on every .btn so
+   text never crowds the edges.
+   --------------------------------------------------------------- */
+@layer components {
+  .btn {
+    min-height: 2.75rem;
+    height: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
+    line-height: 1.2;
+  }
+
+  .btn-sm {
+    min-height: 2.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .btn-xs {
+    min-height: 1.75rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-size: 0.75rem;
+  }
+
+  .btn-lg {
+    min-height: 3.25rem;
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+  }
+
+  /* Circle/square buttons shouldn't get the wide padding from above */
+  .btn-circle,
+  .btn-square {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    width: 2.75rem;
+    height: 2.75rem;
+    min-height: 2.75rem;
+  }
+  .btn-sm.btn-circle,
+  .btn-sm.btn-square {
+    width: 2.25rem;
+    height: 2.25rem;
+    min-height: 2.25rem;
+  }
+  .btn-xs.btn-circle,
+  .btn-xs.btn-square {
+    width: 1.75rem;
+    height: 1.75rem;
+    min-height: 1.75rem;
+  }
+}
