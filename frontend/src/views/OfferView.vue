@@ -196,8 +196,8 @@ onMounted(() => {
       
       <div class="flex flex-col md:flex-row justify-between items-center mb-10 border-b border-gray-200 pb-6">
         <div class="mb-4 md:mb-0 text-center md:text-left">
-          <h1 class="text-4xl font-black text-slate-900 uppercase italic tracking-tighter">Full Offer</h1>
-          <p class="text-gray-500 mt-2 font-bold tracking-widest uppercase text-xs">Find the perfect place to work</p>
+          <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Full Offer</h1>
+          <p class="text-gray-500 mt-2 font-medium text-sm">Find the perfect place to work</p>
         </div>
         
         <div>

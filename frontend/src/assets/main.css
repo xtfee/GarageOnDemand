@@ -2,66 +2,179 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---------------------------------------------------------------
-   Button sizing — daisyUI 5 with Tailwind 3 ships inconsistent button
-   sizing. These rules guarantee comfortable padding on every .btn so
-   text never crowds the edges.
-   --------------------------------------------------------------- */
+/* =================================================================
+   GLOBAL DESIGN TOKENS — tighter, more modern look.
+   Overrides applied as utility-layer rules so existing template
+   classes don't need to change.
+   ================================================================= */
+
+@layer utilities {
+  /* --- Reduce all the oversized radii to something modern --- */
+  .rounded-\[3rem\]      { border-radius: 1rem !important; }
+  .rounded-\[2\.5rem\]   { border-radius: 0.75rem !important; }
+  .rounded-\[2rem\]      { border-radius: 0.625rem !important; }
+  .rounded-3xl           { border-radius: 0.75rem !important; }
+  .rounded-2xl           { border-radius: 0.625rem !important; }
+  .rounded-xl            { border-radius: 0.5rem !important; }
+  .rounded-lg            { border-radius: 0.4rem !important; }
+  /* rounded-md / rounded-sm / rounded-full intentionally untouched */
+
+  .rounded-t-\[2\.5rem\] { border-top-left-radius: 0.75rem !important; border-top-right-radius: 0.75rem !important; }
+  .rounded-b-\[2\.5rem\] { border-bottom-left-radius: 0.75rem !important; border-bottom-right-radius: 0.75rem !important; }
+  .rounded-b-\[3rem\]    { border-bottom-left-radius: 1rem !important; border-bottom-right-radius: 1rem !important; }
+}
+
+/* =================================================================
+   Buttons — daisyUI 5 / Tailwind 3 mismatch means we have to pin
+   sane sizes ourselves.
+   ================================================================= */
+
 @layer components {
   .btn {
-    min-height: 2.75rem;
+    min-height: 2.6rem;
     height: auto;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    padding-top: 0.55rem;
-    padding-bottom: 0.55rem;
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     line-height: 1.2;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    transition: all 0.2s ease;
   }
 
   .btn-sm {
-    min-height: 2.25rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
+    min-height: 2.15rem;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+    font-size: 0.8rem;
   }
 
   .btn-xs {
-    min-height: 1.75rem;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    font-size: 0.75rem;
+    min-height: 1.65rem;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    font-size: 0.72rem;
   }
 
   .btn-lg {
-    min-height: 3.25rem;
-    padding-left: 1.75rem;
-    padding-right: 1.75rem;
+    min-height: 3rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    font-size: 0.95rem;
   }
 
-  /* Circle/square buttons shouldn't get the wide padding from above */
   .btn-circle,
   .btn-square {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    width: 2.75rem;
-    height: 2.75rem;
-    min-height: 2.75rem;
+    padding: 0 !important;
+    width: 2.6rem;
+    height: 2.6rem;
+    min-height: 2.6rem;
+    border-radius: 9999px;
   }
   .btn-sm.btn-circle,
   .btn-sm.btn-square {
-    width: 2.25rem;
-    height: 2.25rem;
-    min-height: 2.25rem;
+    width: 2.15rem;
+    height: 2.15rem;
+    min-height: 2.15rem;
   }
   .btn-xs.btn-circle,
   .btn-xs.btn-square {
-    width: 1.75rem;
-    height: 1.75rem;
-    min-height: 1.75rem;
+    width: 1.65rem;
+    height: 1.65rem;
+    min-height: 1.65rem;
   }
+}
+
+/* =================================================================
+   Typography — soften the very heavy "uppercase italic tracking"
+   pattern that's repeated everywhere. Keep the design language,
+   just dial it back so it reads modern instead of brutalist.
+   ================================================================= */
+
+@layer base {
+  body {
+    font-feature-settings: "ss01", "cv01";
+    color: #1e293b;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.015em;
+  }
+}
+
+@layer utilities {
+  /* font-black is used 200+ times — soften globally */
+  .font-black { font-weight: 800 !important; }
+  /* Slightly tighter than tracking-widest spamming */
+  .tracking-widest  { letter-spacing: 0.1em !important; }
+  .tracking-\[0\.2em\]  { letter-spacing: 0.1em !important; }
+  .tracking-\[0\.3em\]  { letter-spacing: 0.15em !important; }
+}
+
+/* =================================================================
+   Inputs — consistent sizing/radii
+   ================================================================= */
+
+@layer components {
+  .input,
+  .select,
+  .textarea,
+  .file-input {
+    border-radius: 0.5rem !important;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .input:focus,
+  .select:focus,
+  .textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+  }
+}
+
+/* =================================================================
+   Cards & modals — softer shadow scale
+   ================================================================= */
+
+@layer utilities {
+  .shadow-2xl {
+    box-shadow:
+      0 12px 28px -10px rgba(15, 23, 42, 0.18),
+      0 4px 10px -4px rgba(15, 23, 42, 0.06) !important;
+  }
+  .shadow-xl {
+    box-shadow:
+      0 8px 20px -8px rgba(15, 23, 42, 0.14),
+      0 2px 6px -2px rgba(15, 23, 42, 0.05) !important;
+  }
+  .shadow-lg {
+    box-shadow:
+      0 6px 16px -8px rgba(15, 23, 42, 0.12),
+      0 2px 4px -2px rgba(15, 23, 42, 0.04) !important;
+  }
+}
+
+/* =================================================================
+   Misc niceties
+   ================================================================= */
+
+/* Tab underline in dashboards looks crisper with this thickness */
+[class*="border-b-4"] {
+  border-bottom-width: 3px !important;
+}
+
+/* Disable the giant page-wide animated rainbow gradient body bg
+   inherited from index.html — leave a clean neutral surface so
+   the cards/forms read clearly. */
+body {
+  background: #f5f6fa !important;
+  animation: none !important;
 }

@@ -39,9 +39,9 @@ const goToLogin = () => {
   <div class="min-h-screen bg-slate-100 flex items-center justify-center px-4 font-sans select-none py-12">
     <div class="max-w-md w-full">
       
-      <div class="bg-indigo-600 text-white rounded-t-[2.5rem] p-10 shadow-lg text-center">
-        <h1 class="text-3xl font-black italic uppercase tracking-tighter">Garage System</h1>
-        <p class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-60 mt-2 text-indigo-100">Email Address Verification</p>
+      <div class="relative overflow-hidden bg-gradient-to-br from-indigo-600 to-violet-700 text-white rounded-t-[2.5rem] p-10 shadow-md text-center">
+        <h1 class="text-3xl font-extrabold tracking-tight">Garage System</h1>
+        <p class="text-xs font-medium tracking-wide opacity-75 mt-2 text-indigo-100">Email address verification</p>
       </div>
 
       <div class="bg-white rounded-b-[2.5rem] shadow-2xl p-10 text-center border-x border-b border-slate-200">

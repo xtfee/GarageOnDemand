@@ -491,7 +491,7 @@ onMounted(() => loadDataForTab(activeTab.value));
         <header class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-8 lg:mb-12 gap-6">
           <div class="flex items-center gap-4 w-full">
               <button @click="isSidebarOpen = true" class="lg:hidden btn btn-square btn-ghost text-slate-900"><span class="text-3xl">☰</span></button>
-              <div><h1 class="text-3xl lg:text-5xl font-black uppercase italic text-slate-900 tracking-tighter">{{ tabTitle }}</h1><div class="h-2 w-20 lg:w-32 bg-indigo-600 rounded-full mt-2 lg:mt-4"></div></div>
+              <div><h1 class="text-3xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">{{ tabTitle }}</h1><div class="h-1 w-16 lg:w-24 bg-indigo-600 rounded-full mt-3"></div></div>
           </div>
           
           <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">

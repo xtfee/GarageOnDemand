@@ -400,7 +400,7 @@ const goToPayment = (res) => router.push({ path: `/rezerwacja/${res.garage}`, qu
       
       <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
         <div>
-          <h1 class="text-4xl font-black text-slate-900 uppercase italic tracking-tighter">Client Dashboard</h1>
+          <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Client Dashboard</h1>
           <div class="mt-2">
               <p class="text-gray-500 font-bold uppercase text-xs tracking-widest">
                   Logged in as: <span class="text-indigo-600">{{ user.username }}</span>

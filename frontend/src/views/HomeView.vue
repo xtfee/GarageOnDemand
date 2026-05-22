@@ -57,9 +57,11 @@ const goToOffer = () => {
 <template>
   <div class="pb-20 bg-slate-50 min-h-screen">
     
-    <div class="bg-indigo-600 text-white rounded-b-[3rem] p-10 md:p-16 mb-12 shadow-2xl text-center">
-      <h1 class="text-4xl md:text-5xl font-black italic mb-4 uppercase tracking-tighter">Garage OnDemand</h1>
-      <p class="text-sm md:text-base opacity-80 mb-8 font-bold uppercase tracking-[0.2em]">Find a bay and start working</p>
+    <div class="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-indigo-700 to-violet-700 text-white rounded-b-[3rem] p-10 md:p-16 mb-12 shadow-xl text-center">
+      <div class="absolute inset-0 opacity-30 mix-blend-overlay bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.4),transparent_50%)]"></div>
+      <div class="relative">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-3 tracking-tight">Garage <span class="text-indigo-200">OnDemand</span></h1>
+        <p class="text-sm md:text-base text-indigo-100 mb-8 font-medium tracking-wide">Find a bay and start working</p>
       
       <div class="join shadow-xl w-full max-w-lg mx-auto bg-white rounded-btn p-1 border-none">
   <input 
@@ -68,20 +70,21 @@ const goToOffer = () => {
     class="input input-ghost join-item bg-transparent text-gray-900 w-full min-w-0 placeholder-gray-500 px-4 focus:bg-transparent focus:outline-none focus:ring-0 border-none" 
     placeholder="Enter city or equipment..." 
   />
-  <button 
+  <button
     @click="goToOffer"
-    class="btn join-item text-white px-6 md:px-8 shrink-0 bg-indigo-700 hover:bg-indigo-800 border-none rounded-r-btn font-black uppercase italic"
+    class="btn join-item text-white px-6 md:px-8 shrink-0 bg-indigo-700 hover:bg-indigo-800 border-none rounded-r-btn font-bold tracking-wide"
   >
     Search
   </button>
 </div>
+      </div>
     </div>
 
     <div class="container mx-auto px-4 relative">
       
       <div class="mb-10 text-center md:text-left ml-4">
-        <h2 class="text-3xl font-black text-slate-900 uppercase italic tracking-tighter">Recommended Garages</h2>
-        <div class="h-1.5 w-20 bg-indigo-600 rounded-full mt-2 mx-auto md:mx-0"></div>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">Recommended Garages</h2>
+        <div class="h-1 w-16 bg-indigo-600 rounded-full mt-3 mx-auto md:mx-0"></div>
       </div>
 
       <div class="relative group px-2 md:px-10">

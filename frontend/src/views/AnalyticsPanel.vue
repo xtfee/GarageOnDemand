@@ -508,8 +508,8 @@ const getHeatmapColor = (val) => {
     <div class="max-w-7xl mx-auto" :class="{'mt-16': isSimulationMode}">
       
       <div class="text-center mb-10">
-        <h1 class="text-3xl md:text-4xl font-black text-slate-800 uppercase tracking-tight">Analytics Center</h1>
-        <p class="text-slate-500 font-bold mt-2 text-sm md:text-base">Business Intelligence Dashboard</p>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-800 tracking-tight">Analytics Center</h1>
+        <p class="text-slate-500 font-medium mt-2 text-sm md:text-base">Business Intelligence Dashboard</p>
         
         <div class="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 text-slate-600 text-xs md:text-sm font-bold border border-slate-200 shadow-sm">
             <span>🕒 Data range:</span>
