@@ -1,9 +1,6 @@
 import os
 import django
 import random
-import requests
-import time
-from django.core.files.base import ContentFile
 from decimal import Decimal
 from datetime import timedelta, datetime
 from django.db import connection
@@ -19,23 +16,10 @@ from django.contrib.sites.models import Site
 from allauth.socialaccount.models import SocialApp
 
 # --- IMAGE CONFIG ---
-HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-}
-
-# Skrócona lista 10 zdjęć warsztatów
-WORKSHOP_URLS = [
-    "https://images.unsplash.com/photo-1517524206127-48bbd363f3d7?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1625047509168-a7026f36de04?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1504222490345-c075b6008014?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1597760428821-6d43058932bb?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1552996923-bf984e991663?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1632823471565-1ecf98924959?auto=format&fit=crop&w=800&q=80"
-]
+# Photos are pre-bundled in media/garages/garage_1.jpg ... garage_10.jpg
+# We just point each Garage at one of them in round-robin, so we don't
+# depend on the internet and don't pile up duplicate files on each re-seed.
+NUM_PHOTOS = 10
 
 def run_seed():
     print(">>> START SEEDER: Generating Intelligent Data <<<")
@@ -110,19 +94,6 @@ def run_seed():
         obj = Equipment.objects.create(name=item['name'], icon=item['icon'], description="Professional equipment included in rental price.")
         db_eq[item['name']] = obj
 
-    # PRE-DOWNLOAD IMAGES TO AVOID RATE LIMITS
-    print(f"[+] Pobieranie {len(WORKSHOP_URLS)} bazowych zdjec zeby oszukac rate-limity Unsplash...")
-    downloaded_images = []
-    for i, url in enumerate(WORKSHOP_URLS):
-        print(f"   -> Pobieranie bazy {i+1}/{len(WORKSHOP_URLS)}...")
-        try:
-            res = requests.get(url, headers=HEADERS, timeout=10)
-            if res.status_code == 200:
-                downloaded_images.append(res.content)
-            time.sleep(1) # małe opóźnienie dla bezpieczeństwa
-        except Exception as e:
-            print(f"      [!] Błąd pobierania: {e}")
-
     # 5. GARAGES (20 units)
     print("[+] Generating 20 garages...")
     cities = ["Warsaw", "Krakow", "Wroclaw", "Poznan", "Gdansk"]
@@ -151,15 +122,10 @@ def run_seed():
             g.equipment.add(db_eq["YATO Wrench Set"], db_eq["Industrial Vacuum"])
             if random.random() > 0.5: g.equipment.add(db_eq["50L Compressor"])
 
-        # Przypisanie pre-pobranych zdjęć (modulo zapętla index)
-        if downloaded_images:
-            img_content = downloaded_images[i % len(downloaded_images)]
-            # Zapisujemy ContentFile bezpośrednio z pamięci - to jest błyskawiczne i nie robi strzałów po sieci
-            g.image.save(f"garage_view_{i+1}.jpg", ContentFile(img_content))
-            print(f"   -> Przypisano zdjecie do {name}")
-        else:
-            print(f"   -> Ominieto zdjecie dla {name} (brak pobranych bazowych)")
-            
+        # Assign one of the pre-bundled photos by setting the ImageField path
+        # directly. No upload through Django, no HTTP, no duplicate files.
+        photo_index = (i % NUM_PHOTOS) + 1
+        g.image = f"garages/garage_{photo_index}.jpg"
         g.save()
         garages.append(g)
 
