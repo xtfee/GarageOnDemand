@@ -108,7 +108,7 @@ onUnmounted(() => {
                         Reservation #{{ pendingReservation.id }}
                     </div>
                     <div class="font-black text-lg text-slate-900 pr-1">
-                        {{ pendingReservation.total_price }} PLN
+                        {{ pendingReservation.total_price }} EUR
                     </div>
                 </div>
 

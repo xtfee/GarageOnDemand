@@ -522,7 +522,7 @@ onMounted(() => loadDataForTab(activeTab.value));
                       <tr v-for="g in paginatedData" :key="g.id" class="hover:bg-indigo-50/50 transition-colors h-24">
                         <td class="p-6 align-middle min-w-[200px]"><div class="flex items-center gap-4"><div class="avatar shadow-md shrink-0"><div class="w-16 h-16 rounded-2xl border-2 border-slate-50 overflow-hidden"><img :src="g.image || 'https://via.placeholder.com/150'" class="object-cover w-full h-full" /></div></div><div class="font-black text-slate-900 text-lg tracking-tighter uppercase leading-tight">{{ g.name }}</div></div></td>
                         <td class="align-middle min-w-[250px]"><div class="flex flex-col justify-center"><div class="font-bold text-slate-800 text-sm">{{ g.address }}</div><div class="text-xs text-slate-500 mt-1 line-clamp-1 italic">{{ g.description }}</div></div></td>
-                        <td class="align-middle whitespace-nowrap"><div class="flex flex-col justify-center"><div class="text-indigo-600 font-black text-lg leading-none">{{ g.price_per_hour }} / {{ g.price_per_day }}</div><div class="text-xs text-slate-400 font-bold uppercase mt-1 tracking-widest">PLN</div></div></td>
+                        <td class="align-middle whitespace-nowrap"><div class="flex flex-col justify-center"><div class="text-indigo-600 font-black text-lg leading-none">{{ g.price_per_hour }} / {{ g.price_per_day }}</div><div class="text-xs text-slate-400 font-bold uppercase mt-1 tracking-widest">EUR</div></div></td>
                         <td class="text-center align-middle"><div class="flex flex-wrap justify-center gap-1 max-w-[200px] mx-auto"><span v-for="eqId in g.equipment" :key="eqId" class="badge badge-xs bg-slate-100 text-slate-500 border-none font-bold uppercase py-2 px-2 whitespace-nowrap">{{ (typeof eqId === 'object' ? eqId.name : allEquipment.find(e => String(e.id) === String(eqId))?.name) || 'Equipment' }}</span><span v-if="!g.equipment || g.equipment.length === 0" class="text-slate-300 italic text-[10px]">Empty</span></div></td>
                         <td class="text-right p-6 align-middle whitespace-nowrap"><div class="flex justify-end gap-2 items-center"><button class="btn btn-square bg-amber-100 hover:bg-amber-200 border-none font-bold shadow-sm" @click="openModal(g)">✎</button><button class="btn btn-square bg-red-100 hover:bg-red-200 border-none font-bold shadow-sm" @click="deleteGarage(g.id)">✕</button></div></td>
                       </tr>
@@ -628,14 +628,14 @@ onMounted(() => loadDataForTab(activeTab.value));
                     <label class="font-black text-slate-500 uppercase text-[10px]">Price / Hour</label>
                     <div class="relative">
                         <input v-model="settings.base_hour_price" type="number" step="0.01" class="input input-bordered border-2 font-bold h-12 rounded-xl w-full pl-10 px-4" />
-                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">PLN</span>
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">EUR</span>
                     </div>
                   </div>
                   <div class="flex flex-col gap-2">
                     <label class="font-black text-slate-500 uppercase text-[10px]">Price / Day</label>
                     <div class="relative">
                         <input v-model="settings.base_day_price" type="number" step="0.01" class="input input-bordered border-2 font-bold h-12 rounded-xl w-full pl-10 px-4" />
-                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">PLN</span>
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">EUR</span>
                     </div>
                   </div>
                 </div>
@@ -789,14 +789,14 @@ onMounted(() => loadDataForTab(activeTab.value));
                     <label class="font-black text-slate-400 uppercase text-[10px] tracking-widest">Price / H</label>
                     <div class="relative">
                         <input v-model="form.price_per_hour" type="number" step="0.01" class="input input-bordered border-2 font-bold rounded-xl h-12 w-full pl-12 px-4" required />
-                        <span class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-400 text-xs">PLN</span>
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-400 text-xs">EUR</span>
                     </div>
                 </div>
                 <div class="flex flex-col gap-2">
                     <label class="font-black text-slate-400 uppercase text-[10px] tracking-widest">Price / Day</label>
                     <div class="relative">
                         <input v-model="form.price_per_day" type="number" step="0.01" class="input input-bordered border-2 font-bold rounded-xl h-12 w-full pl-12 px-4" required />
-                        <span class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-400 text-xs">PLN</span>
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-slate-400 text-xs">EUR</span>
                     </div>
                 </div>
                 <div class="md:col-span-2 flex flex-col gap-2">

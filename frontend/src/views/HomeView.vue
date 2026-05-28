@@ -126,7 +126,7 @@ const goToOffer = () => {
                 </div>
 
                 <div class="absolute top-6 right-6 bg-indigo-600 text-white px-5 py-2 rounded-2xl font-black shadow-lg text-sm italic">
-                  {{ garage.price_per_hour }} PLN/h
+                  {{ garage.price_per_hour }} EUR/h
                 </div>
               </figure>
 
@@ -201,12 +201,12 @@ const goToOffer = () => {
           <div class="grid grid-cols-2 gap-4">
             <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center">
                <span class="block text-xs font-bold text-gray-400 uppercase">Hourly Rate</span>
-               <span class="block text-2xl font-black text-indigo-600">{{ selectedGarage.price_per_hour }} PLN</span>
+               <span class="block text-2xl font-black text-indigo-600">{{ selectedGarage.price_per_hour }} EUR</span>
             </div>
             <div class="bg-indigo-50 p-4 rounded-2xl border border-indigo-100 text-center">
                <span class="block text-xs font-bold text-indigo-400 uppercase">Daily Rate</span>
                <span class="block text-2xl font-black text-indigo-900">
-                  {{ selectedGarage.price_per_day || (parseFloat(selectedGarage.price_per_hour) * 24).toFixed(2) }} PLN
+                  {{ selectedGarage.price_per_day || (parseFloat(selectedGarage.price_per_hour) * 24).toFixed(2) }} EUR
                </span>
             </div>
           </div>

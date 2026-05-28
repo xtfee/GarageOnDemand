@@ -12,13 +12,13 @@ const allAvailableCities = ref([]);
 
 // --- ZMIENNE FILTRÓW ---
 const draftMinPrice = ref(0);
-const draftMaxPrice = ref(200);
+const draftMaxPrice = ref(50);
 const draftLocation = ref("");
 const draftEquipment = ref([]);
 
 const activeFilters = ref({
   minPrice: 0,
-  maxPrice: 200,
+  maxPrice: 50,
   location: "",
   equipment: []
 });
@@ -136,7 +136,7 @@ const applyFilters = () => {
 
 const clearFilters = () => {
   draftMinPrice.value = 0;
-  draftMaxPrice.value = 200;
+  draftMaxPrice.value = 50;
   draftLocation.value = "";
   draftEquipment.value = [];
   applyFilters();
@@ -156,7 +156,7 @@ const openDetails = (garage) => {
 }
 
 const sliderTrackStyle = computed(() => {
-  const percentage = (draftMaxPrice.value / 200) * 100;
+  const percentage = (draftMaxPrice.value / 50) * 100;
   return { background: `linear-gradient(to right, white 0%, white ${percentage}%, rgb(75, 85, 99) ${percentage}%, rgb(75, 85, 99) 100%)` };
 });
 
@@ -229,10 +229,10 @@ onMounted(() => {
               
               <div class="absolute top-4 right-4 flex flex-col items-end gap-2">
                 <div class="bg-indigo-600 text-white px-4 py-1.5 rounded-xl font-black shadow-lg text-sm italic">
-                  {{ garage.price_per_hour }} PLN/h
+                  {{ garage.price_per_hour }} EUR/h
                 </div>
                <div class="bg-green-500 text-white px-3 py-1 rounded-lg font-black text-[10px] uppercase tracking-wider shadow-[0_4px_10px_rgba(34,197,94,0.4)] border border-white/20">
-                Day: {{ garage.price_per_day || (parseFloat(garage.price_per_hour) * 24).toFixed(2) }} PLN
+                Day: {{ garage.price_per_day || (parseFloat(garage.price_per_hour) * 24).toFixed(2) }} EUR
               </div>
               </div>
             </figure>
@@ -297,13 +297,13 @@ onMounted(() => {
             <label class="label p-0 mb-2 justify-between">
               <span class="label-text font-bold text-gray-200 text-xs uppercase tracking-wider">Maximum rate</span>
               <span class="label-text-alt font-black text-indigo-400 text-base">
-                {{ draftMaxPrice >= 200 ? '200+ PLN/h' : `up to ${draftMaxPrice} PLN/h` }}
+                {{ draftMaxPrice >= 50 ? '50+ EUR/h' : `up to ${draftMaxPrice} EUR/h` }}
               </span>
             </label>
-            <input 
-              type="range" 
-              min="0" 
-              max="200" 
+            <input
+              type="range"
+              min="0"
+              max="50"
               v-model="draftMaxPrice"
               :style="sliderTrackStyle"
               class="range range-xs range-primary" 
@@ -366,12 +366,12 @@ onMounted(() => {
           <div class="grid grid-cols-2 gap-4">
             <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center">
                <span class="block text-xs font-bold text-gray-400 uppercase">Hourly Rate</span>
-               <span class="block text-2xl font-black text-indigo-600">{{ selectedGarage.price_per_hour }} PLN</span>
+               <span class="block text-2xl font-black text-indigo-600">{{ selectedGarage.price_per_hour }} EUR</span>
             </div>
             <div class="bg-indigo-50 p-4 rounded-2xl border border-indigo-100 text-center">
                <span class="block text-xs font-bold text-indigo-400 uppercase">Daily Rate</span>
                <span class="block text-2xl font-black text-indigo-900">
-                  {{ selectedGarage.price_per_day || (parseFloat(selectedGarage.price_per_hour) * 24).toFixed(2) }} PLN
+                  {{ selectedGarage.price_per_day || (parseFloat(selectedGarage.price_per_hour) * 24).toFixed(2) }} EUR
                </span>
             </div>
           </div>

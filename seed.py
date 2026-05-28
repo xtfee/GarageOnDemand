@@ -132,7 +132,8 @@ def run_seed():
         is_pro = i < 8 
         
         name = f"{'Center' if is_pro else 'Garage'} {'Mechanic' if is_pro else 'Hobby'} #{i+1}"
-        price_h = Decimal(random.randint(80, 150) if is_pro else random.randint(30, 60))
+        # Hourly prices in EUR — realistic European rates
+        price_h = Decimal(random.randint(18, 35) if is_pro else random.randint(7, 14))
         
         g = Garage.objects.create(
             name=name,

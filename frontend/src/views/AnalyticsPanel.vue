@@ -244,7 +244,7 @@ const fetchAnalytics = async () => {
         revenueChartData.value = {
             labels: res.data.revenue.labels,
             datasets: [{
-                label: 'Revenue (PLN)',
+                label: 'Revenue (EUR)',
                 backgroundColor: '#4F46E5',
                 borderColor: '#4F46E5',
                 data: res.data.revenue.data,
@@ -426,7 +426,7 @@ const handleFileUpload = async (event) => {
         revenueChartData.value = {
             labels: res.data.revenue.labels,
             datasets: [{
-                label: 'Revenue (PLN)',
+                label: 'Revenue (EUR)',
                 backgroundColor: '#F59E0B', 
                 borderColor: '#F59E0B',
                 data: res.data.revenue.data,

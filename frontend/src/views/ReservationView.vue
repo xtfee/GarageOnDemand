@@ -503,7 +503,7 @@ const canProceed = computed(() => {
             <div class="card-body p-8">
               <div class="flex justify-between font-bold text-slate-700 mb-4 border-b border-slate-100 pb-4">
                 <span class="text-slate-400 uppercase text-xs tracking-widest self-center">Hourly Rate</span>
-                <span class="text-lg">{{ garage.price_per_hour }} PLN</span>
+                <span class="text-lg">{{ garage.price_per_hour }} EUR</span>
               </div>
               <div class="mb-4">
                 <span class="text-slate-400 uppercase text-[10px] tracking-widest font-black block mb-2">Available equipment</span>
@@ -517,7 +517,7 @@ const canProceed = computed(() => {
               <div class="flex justify-between items-end mt-2">
                 <span class="text-slate-400 uppercase text-xs tracking-widest font-bold">To pay</span>
                 <div class="text-right">
-                  <span class="font-black text-4xl text-indigo-600">{{ totalPrice }} <span class="text-lg text-slate-400">PLN</span></span>
+                  <span class="font-black text-4xl text-indigo-600">{{ totalPrice }} <span class="text-lg text-slate-400">EUR</span></span>
                   
                   <div class="text-[10px] text-indigo-400 font-bold uppercase mt-1">
                       <span v-if="isSingleDay && (busyHoursForSelectedDate.length > 0 || (endTime.hours - startTime.hours < 24))">
@@ -580,7 +580,7 @@ const canProceed = computed(() => {
                   <div v-if="errorMessage" class="alert alert-error text-sm mb-4 rounded-xl font-bold">{{ errorMessage }}</div>
                   <button @click="payNow" :disabled="isProcessing" class="btn bg-indigo-600 hover:bg-indigo-700 text-white w-full h-16 rounded-2xl font-black uppercase italic tracking-widest shadow-xl transition-all text-lg">
                     <span v-if="isProcessing" class="loading loading-spinner"></span>
-                    <span v-else>Pay {{ totalPrice }} PLN</span>
+                    <span v-else>Pay {{ totalPrice }} EUR</span>
                   </button>
               </template>
           </div>
@@ -629,7 +629,7 @@ const canProceed = computed(() => {
     >
       <span v-if="isProcessing" class="loading loading-spinner"></span>
       <span v-else-if="hasCollision">Time Slot Busy</span>
-      <span v-else>Reserve Time Slot ({{ totalPrice }} PLN) <span class="ml-2">→</span></span>
+      <span v-else>Reserve Time Slot ({{ totalPrice }} EUR) <span class="ml-2">→</span></span>
     </button>
 </div>
 

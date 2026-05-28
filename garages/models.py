@@ -67,8 +67,8 @@ class Payment(models.Model):
 
 class SystemConfig(models.Model):
     refund_limit_hours = models.IntegerField(default=24, help_text="How many hours before start cancellation is free")
-    base_hour_price = models.DecimalField(default=50.00, max_digits=6, decimal_places=2)
-    base_day_price = models.DecimalField(default=350.00, max_digits=6, decimal_places=2)
+    base_hour_price = models.DecimalField(default=12.00, max_digits=6, decimal_places=2)
+    base_day_price = models.DecimalField(default=80.00, max_digits=6, decimal_places=2)
     
     max_active_reservations = models.IntegerField(default=3, help_text="Maximum number of active reservations per user")
     max_reservation_days = models.IntegerField(default=7, help_text="Maximum length of one reservation in days")

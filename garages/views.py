@@ -401,7 +401,7 @@ class ReservationViewSet(viewsets.ModelViewSet):
         try:
             intent = stripe.PaymentIntent.create(
                 amount=int(additional_cost * 100),
-                currency='pln',
+                currency='eur',
                 metadata={
                     'reservation_id': reservation.id,
                     'type': 'extension',
@@ -480,7 +480,7 @@ def create_payment_intent(request, reservation_id):
     try:
         intent = stripe.PaymentIntent.create(
             amount=int(reservation.total_price * 100),
-            currency='pln',
+            currency='eur',
             metadata={'reservation_id': reservation.id},
             automatic_payment_methods={'enabled': True},
         )

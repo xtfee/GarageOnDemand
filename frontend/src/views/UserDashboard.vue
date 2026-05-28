@@ -413,7 +413,7 @@ const goToPayment = (res) => router.push({ path: `/rezerwacja/${res.garage}`, qu
         <div class="flex flex-wrap gap-4 w-full md:w-auto justify-end">
             <div class="bg-white px-6 py-3 rounded-2xl shadow-sm border border-slate-100 text-center flex-1 md:flex-none">
                 <div class="text-[10px] text-slate-400 font-black uppercase tracking-widest">Spent funds</div>
-                <div class="text-xl font-black text-indigo-600">{{ totalSpent }} PLN</div>
+                <div class="text-xl font-black text-indigo-600">{{ totalSpent }} EUR</div>
             </div>
             <div class="bg-white px-6 py-3 rounded-2xl shadow-sm border border-slate-100 text-center flex-1 md:flex-none">
                 <div class="text-[10px] text-slate-400 font-black uppercase tracking-widest">Reservations</div>
@@ -493,7 +493,7 @@ const goToPayment = (res) => router.push({ path: `/rezerwacja/${res.garage}`, qu
 
                     <div class="flex flex-col md:flex-row items-end md:items-center gap-4 w-full md:w-auto">
                         <div class="text-right mr-2">
-                            <span class="font-black text-indigo-600 text-xl">{{ res.total_price }} PLN</span>
+                            <span class="font-black text-indigo-600 text-xl">{{ res.total_price }} EUR</span>
                             
                             <div v-if="res.status === 'pending'" class="mt-2 flex flex-col items-end gap-1">
                                 <div v-if="!isExpired(res.created_at)" class="flex flex-col items-end">
@@ -538,7 +538,7 @@ const goToPayment = (res) => router.push({ path: `/rezerwacja/${res.garage}`, qu
              </div>
              <div class="text-right relative z-10">
                  <div class="text-xs font-bold uppercase opacity-60">Spent</div>
-                 <div class="text-4xl font-black">{{ totalSpent }} <span class="text-lg">PLN</span></div>
+                 <div class="text-4xl font-black">{{ totalSpent }} <span class="text-lg">EUR</span></div>
              </div>
           </div>
 
@@ -584,7 +584,7 @@ const goToPayment = (res) => router.push({ path: `/rezerwacja/${res.garage}`, qu
                                   <button @click="goToPayment(res)" class="btn btn-xs bg-indigo-600 hover:bg-indigo-700 text-white border-none rounded-lg">Pay now</button>
                               </div>
                           </td>
-                          <td class="text-right p-5 font-black text-indigo-600">{{ res.total_price }} PLN</td>
+                          <td class="text-right p-5 font-black text-indigo-600">{{ res.total_price }} EUR</td>
                       </tr>
                       <tr v-if="paginatedReservations.length === 0">
                           <td colspan="4" class="text-center py-10 text-gray-400 font-bold">No transactions match the criteria.</td>
@@ -772,7 +772,7 @@ const goToPayment = (res) => router.push({ path: `/rezerwacja/${res.garage}`, qu
             </div>
 
             <div v-if="extensionStep === 2">
-                <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100 mb-6 flex justify-between items-center"><span class="text-xs font-bold text-indigo-400 uppercase">Amount due</span><span class="font-black text-2xl text-indigo-700">{{ extensionAdditionalCost }} PLN</span></div>
+                <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100 mb-6 flex justify-between items-center"><span class="text-xs font-bold text-indigo-400 uppercase">Amount due</span><span class="font-black text-2xl text-indigo-700">{{ extensionAdditionalCost }} EUR</span></div>
                 <div id="extension-payment-element" class="min-h-[200px] mb-6"></div>
                 <div v-if="extensionError" class="alert alert-error text-sm mb-4 rounded-xl font-bold">{{ extensionError }}</div>
                 <div class="modal-action justify-between">
